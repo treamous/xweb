@@ -16,5 +16,5 @@ Copyright © 2011 Preston Lee. All rights reserved.
 See license file for details.
 
 Students:
-	tremous (Jeffries)
+	treamous (Jeffries)
 	moradi  (Moradi)
