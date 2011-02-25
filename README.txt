@@ -14,3 +14,7 @@ Copyright © 2011 Preston Lee. All rights reserved.
 = License
 
 See license file for details.
+
+Students:
+	tremous (Jeffries)
+	moradi  (Moradi)
