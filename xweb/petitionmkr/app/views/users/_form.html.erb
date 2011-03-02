@@ -1,0 +1,58 @@
+<div class="petitionuser_form">
+<%= form_for(@user) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> 
+      prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <fieldset>
+  <legend>Enter User Details</legend>
+  
+  <div>
+    <%= f.label :name %><br />
+    <%= f.text_field :name, :size => 40 %>
+  </div>
+  <div>
+    <%= f.label :state %><br />
+    <%= f.text_field :state, :size => 2 %>
+  </div>
+  <div>
+    <%= f.label :age %><br />
+    <%= f.text_field :age, :size => 3 %>
+  </div>
+  <div>
+    <%= f.label :ethnicity %><br />
+    <%= f.text_field :ethnicity, :size => 40 %>
+  </div>
+  <div>
+    <%= f.label :interest %><br />
+    <%= f.text_field :interest, :size => 40 %>
+  </div>
+  <div>
+    <%= f.label :affiliation %><br />
+    <%= f.text_field :affiliation, :size => 40 %>
+  </div>
+  <div>
+    <%= f.label :hashed_password, 'Password' %><br />
+    <%= f.password_field :password, :size => 40 %>
+  </div>
+  <div>
+    <%= f.label :password_confirmation, 'Confirm' %>
+    <%= f.password_field :password_confirmation, :size => 40 %>
+  </div>
+  <div>
+    <%= f.submit %>
+  </div>
+  
+    </fieldset>
+<% end %>
+
+</div>
