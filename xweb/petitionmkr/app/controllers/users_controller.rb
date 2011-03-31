@@ -24,12 +24,14 @@ class UsersController < ApplicationController
     userid = session[:user_id]
     @user = User.find(userid)
     @mypetitions = Petition.search(username)
+    @signpetitions = Petition.searchsignup(username)
     
     if @user
       respond_to do |format|
         format.html # portfolio.html.erb
         format.xml  { render :xml => @user}
         format.xml  { render :xml => @mypetitions}
+        format.xml  { render :xml => @signpetitions}
       end
     else
       flash[:notice] = "An error occured while logging in, please try again."

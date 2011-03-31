@@ -53,11 +53,11 @@
       <th>Title</th>
       <th>Close date</th>
     </tr>
-<% @mypetitions.each do |d|%>
+<% @mypetitions.each_with_index do |d,index|%>
 <tr class="<%= cycle('odd', 'even') %>">
 <td>
 <b>
-<%= link_to d.title, {:controller => 'petitions', :action => 'show', :petition => d} %>
+<%= link_to d.title, {:controller => 'petitions', :action => 'show', :id => d.id} %>
 </b>
 </td>
 
@@ -75,6 +75,32 @@
 <h2>
 <b>Petitions I can sign...</b>
 </h2>
+
+
+
+<div>
+<table>
+	    <tr class="header">
+
+      <th>Title</th>
+      <th>Close date</th>
+    </tr>
+<% @signpetitions.each_with_index do |d,index|%>
+<tr class="<%= cycle('odd', 'even') %>">
+<td>
+<b>
+<%= link_to d.title, {:controller => 'petitions', :action => 'show', :id => d.id} %>
+</b>
+</td>
+
+<td> <%= d.closedate %></td>
+</tr>
+<% end %>
+</table>
+</div>
+
+
+
 
 
 <hr />

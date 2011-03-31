@@ -16,12 +16,12 @@ class PetitionsController < ApplicationController
   # GET /petitions/1
   # GET /petitions/1.xml
   def show
-#    @petition = Petition.find(params[:id])
-#
-#    respond_to do |format|
-#      format.html # show.html.erb
-#      format.xml  { render :xml => @petition }
-#    end
+    @petition = Petition.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.xml  { render :xml => @petition }
+    end
   end
 
   # GET /petitions/new
@@ -49,7 +49,9 @@ class PetitionsController < ApplicationController
     @petition.title = params[:title]
     @petition.description = params[:description]
     @petition.criteria = params[:criteria]
-    @petition.closedate = params[:closedate]      
+    @end_date = Time.zone.local(*params[:seldate].sort.map(&:last).map(&:to_i)) 
+    logger.debug("Petition eddate: #{@end_date} ")
+    @petition.closedate = @end_date
     @petition.username = session[:username]
     
     respond_to do |format|

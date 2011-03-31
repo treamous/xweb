@@ -7,7 +7,7 @@
   <div>
       <%= label_tag(:description) %>
       <br/>
-      <%= text_area_tag(:description) %>
+      <%= text_area_tag(:description, nil, :size => "100x25") %>
   </div>
   <div>
       <%= label_tag(:criteria) %>
@@ -17,7 +17,7 @@
   <div>
       <%= label_tag(:closedate) %>
       <br/>
-      <%= datetime_select(:petition, :closedate, :order => [:month, :day, :year],:start_year => Date.today.year, :end_year => Date.today.year + 5, :minute_step => 60)%>
+      <%= datetime_select('seldate', 'closewhen', :order => [:month, :day, :year],:start_year => Date.today.year, :end_year => Date.today.year + 5, :minute_step => 60)%>
   </div>
   
   <div class="actions">

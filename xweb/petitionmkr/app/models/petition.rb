@@ -6,4 +6,5 @@ class Petition < ActiveRecord::Base
   validates :closedate, :presence => true
 
   scope :search, lambda {|query| where(["username LIKE ?", "%#{query}%"])}
+  scope :searchsignup, lambda {|query| where(["username NOT LIKE ? AND (closedate > datetime('now', 'localtime'))", "%#{query}%"])}
 end
