@@ -15,6 +15,9 @@
   <%= @petition.criteria %>
 </p>
 
+<p>
+  <b>Closure Date:</b>
+  <%= @petition.closedate %>
+</p>
 
-<%= link_to 'Edit', edit_petition_path(@petition) %> |
-<%= link_to 'Back', petitions_path %>
+<%= link_to 'Back', {:controller => 'users', :action => 'portfolio', :user => @user} %> | <%= link_to 'Logout', {:controller => 'admin', :action => 'logout'} %>

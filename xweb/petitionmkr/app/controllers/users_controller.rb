@@ -7,16 +7,36 @@
 # Visit http://www.pragmaticprogrammer.com/titles/rails4 for more book information.
 #---
 class UsersController < ApplicationController
+  before_filter :confirm_logged_in
+  
   # GET /users
   # GET /users.xml
   def index
-    @users = User.order(:name)
+    username = session[:username]
+    @mypetitions = Petition.search(username)
+  end
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @users }
+  # author Tre Jeffries
+  # GET /users/2
+  # GET /users/2.xml
+  def portfolio
+    username = session[:username]
+    userid = session[:user_id]
+    @user = User.find(userid)
+    @mypetitions = Petition.search(username)
+    
+    if @user
+      respond_to do |format|
+        format.html # portfolio.html.erb
+        format.xml  { render :xml => @user}
+        format.xml  { render :xml => @mypetitions}
+      end
+    else
+      flash[:notice] = "An error occured while logging in, please try again."
+      redirect_to(:controller => 'admin', :action => 'login')
     end
   end
+
 
   # GET /users/1
   # GET /users/1.xml
@@ -28,7 +48,7 @@ class UsersController < ApplicationController
       format.xml  { render :xml => @user }
     end
   end
-
+  
   # GET /users/new
   # GET /users/new.xml
   def new
@@ -42,7 +62,13 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    @user = User.find(params[:id])
+    userid = session[:user_id]
+    @user = User.find(userid)
+    respond_to do |format|
+      format.html # edit.html.erb
+      format.xml  { render :xml => @user }
+    end
+
   end
 
   # POST /users
@@ -53,7 +79,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         format.html { redirect_to(users_url,
-          :notice => "User #{@user.name} was successfully created.") }
+          :notice => "User #{@user.username} was successfully created.") }
         format.xml  { render :xml => @user,
           :status => :created, :location => @user }
       else
@@ -67,12 +93,13 @@ class UsersController < ApplicationController
   # PUT /users/1
   # PUT /users/1.xml
   def update
-    @user = User.find(params[:id])
+    userid = session[:user_id]
+    @user = User.find(userid)
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
         format.html { redirect_to(users_url,
-          :notice => "User #{@user.name} was successfully updated.") }
+          :notice => "User #{@user.username} was successfully updated.") }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -85,7 +112,8 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.xml
   def destroy
-    @user = User.find(params[:id])
+    userid = session[:user_id]
+    @user = User.find(userid)
     @user.destroy
 
     respond_to do |format|

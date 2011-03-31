@@ -10,27 +10,35 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110301052601) do
+ActiveRecord::Schema.define(:version => 20110330201944) do
 
   create_table "petitions", :force => true do |t|
-    t.string   "title",       :null => false
-    t.string   "description", :null => false
-    t.string   "criteria",    :null => false
+    t.string   "title",       :limit => 100, :null => false
+    t.text     "description",                :null => false
+    t.string   "criteria",                   :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "username"
+    t.datetime "closedate"
   end
 
+  add_index "petitions", ["username"], :name => "index_petitions_on_username"
+
   create_table "users", :force => true do |t|
-    t.string   "name"
-    t.string   "state"
-    t.integer  "age"
-    t.string   "ethnicity"
-    t.string   "interest"
-    t.string   "affiliation"
-    t.string   "hashed_password"
-    t.string   "salt"
+    t.string   "state",           :limit => 2
+    t.integer  "age",             :limit => 3
+    t.text     "interest"
+    t.text     "affiliation"
+    t.string   "hashed_password", :limit => 40
+    t.string   "salt",            :limit => 40
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "email",           :limit => 40, :default => ""
+    t.string   "username"
+    t.string   "first_name",      :limit => 40, :default => ""
+    t.string   "last_name",       :limit => 40, :default => ""
   end
+
+  add_index "users", ["username"], :name => "index_users_on_username"
 
 end

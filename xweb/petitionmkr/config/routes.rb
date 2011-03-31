@@ -1,8 +1,10 @@
 Petitionmkr::Application.routes.draw do
-  resources :petitions
-  resources :users
+  #resources :newusers
+
+  #resources :petitions
+  #resources :users
+  #resources :admin
      
-  #get 'admin' => 'admin#index'
   
 #controller :sessions do
 #  get 'login' => :new
@@ -14,6 +16,7 @@ Petitionmkr::Application.routes.draw do
  #match '/login', :controller => 'sessions', :action => 'new'
  #match '/logout', :controller => 'sessions', :action => 'destroy'
 
+# match '/attempt_login', :controller => 'admin', :action => 'attempt_login'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -64,11 +67,12 @@ Petitionmkr::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => "users#index"
+  #root :to => "users#index"
+  root :to => "admin#login"
 
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
-  # match ':controller(/:action(/:id(.:format)))'
+  match ':controller(/:action(/:id(.:format)))'
 end

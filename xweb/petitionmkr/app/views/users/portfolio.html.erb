@@ -1,0 +1,81 @@
+<p id="notice"><%= notice %></p>
+<h2>
+<b>User Profile</b>
+</h2>
+<p>
+  <b>First Name:</b>
+  <%= @user.first_name %>
+</p>
+
+<p>
+  <b>Last Name:</b>
+  <%= @user.last_name %>
+</p>
+
+<p>
+  <b>Username:</b>
+  <%= @user.username %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%= @user.email %>
+</p>
+
+<p>
+  <b>State:</b>
+  <%= @user.state %>
+</p>
+
+<p>
+  <b>Age:</b>
+  <%= @user.age %>
+</p>
+
+<p>
+  <b>Interest:</b>
+  <%= @user.interest %>
+</p>
+
+<p>
+  <b>Affiliation:</b>
+  <%= @user.affiliation %>
+</p>
+<hr />
+<h2>
+<b>Petitions I Manage...</b>
+</h2>
+
+<div>
+<table>
+	    <tr class="header">
+
+      <th>Title</th>
+      <th>Close date</th>
+    </tr>
+<% @mypetitions.each do |d|%>
+<tr class="<%= cycle('odd', 'even') %>">
+<td>
+<b>
+<%= link_to d.title, {:controller => 'petitions', :action => 'show', :petition => d} %>
+</b>
+</td>
+
+<td> <%= d.closedate %></td>
+</tr>
+<% end %>
+</table>
+</div>
+<br />
+<%= link_to 'Create a new Petition', {:controller => 'petitions', :action => 'new', :user => @user} %>
+<hr />
+
+
+
+<h2>
+<b>Petitions I can sign...</b>
+</h2>
+
+
+<hr />
+<%= link_to 'Edit profile', {:controller => 'users', :action => 'edit', :user => @user} %> | <%= link_to 'Logout', {:controller => 'admin', :action => 'logout'} %>

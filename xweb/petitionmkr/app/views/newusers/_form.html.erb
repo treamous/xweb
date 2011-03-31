@@ -1,0 +1,53 @@
+<div class="petitionnewuser_form">
+<%= form_tag(:action => 'create') do%>
+  <fieldset>
+  <legend>Enter User Details</legend>
+  
+  <div>
+    <%= label_tag(:first_name) %><br />
+    <%=text_field_tag(:first_name) %>
+  </div>
+    <div>
+    <%= label_tag(:last_name) %><br />
+    <%= text_field_tag(:last_name)%>
+  </div>
+    <div>
+    <%= label_tag(:user_name) %><br />
+    <%= text_field_tag(:username) %>
+  </div>
+      <div>
+    <%= label_tag(:email) %><br />
+    <%= text_field_tag(:email) %>
+  </div>
+  <div>
+    <%= label_tag(:state) %><br />
+    <%= text_field_tag(:state) %>
+  </div>
+  <div>
+    <%= label_tag(:age) %><br />
+    <%= text_field_tag(:age) %>
+  </div>
+  <div>
+    <%= label_tag(:interest) %><br />
+    <%= text_field_tag(:interest) %>
+  </div>
+  <div>
+    <%= label_tag(:affiliation) %><br />
+    <%= text_field_tag(:affiliation) %>
+  </div>
+  <div>
+    <%= label_tag(:password)%><br />
+    <%= password_field_tag(:password)%>
+  </div>
+  <div>
+    <%= label_tag(:password_confirmation) %>
+    <%= password_field_tag(:password_confirmation) %>
+  </div>
+  <div>
+    <%= submit_tag("Create me!!!") %>
+  </div>
+  
+    </fieldset>
+<% end %>
+
+</div>
