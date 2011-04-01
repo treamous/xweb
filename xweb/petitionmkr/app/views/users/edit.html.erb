@@ -1,8 +1,8 @@
-<h1>Editing user</h1>
+<h1>Edit your user profile</h1>
 
 <!--%= render 'form' %-->
 <div>
-<%= form_for(:user) do |f| %>
+<%= form_for(:user, :url => {:action => 'update', :id => @user.id}) do |f| %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@user.errors.count, "error") %> 
@@ -17,7 +17,7 @@
   <% end %>
 
   <fieldset>
-  <legend>Enter User Details</legend>
+  <legend>Edit User Details</legend>
   
   <div>
     <%= f.label :first_name %><br />
@@ -27,11 +27,7 @@
     <%= f.label :last_name %><br />
     <%= f.text_field :last_name, :size => 40 %>
   </div>
-    <div>
-    <%= f.label :user_name %><br />
-    <%= f.text_field :username, :size => 40 %>
-  </div>
-      <div>
+  <div>
     <%= f.label :email %><br />
     <%= f.text_field :email, :size => 40 %>
   </div>
@@ -52,14 +48,6 @@
     <%= f.text_field :affiliation, :size => 40 %>
   </div>
   <div>
-    <%= f.label :hashed_password, 'Password' %><br />
-    <%= f.password_field :password, :size => 40 %>
-  </div>
-  <div>
-    <%= f.label :password_confirmation, 'Confirm' %>
-    <%= f.password_field :password_confirmation, :size => 40 %>
-  </div>
-  <div>
     <%= f.submit %>
   </div>
   
@@ -69,4 +57,4 @@
 </div>
 
 <!--%= link_to 'Show', @user %-->
-<%= link_to 'Back', {:controller => 'users', :action => 'portfolio', :user => @user} %>
+<%= link_to 'Back', {:controller => 'users', :action => 'portfolio', :user => @user} %> | <%= link_to 'Logout', {:controller => 'admin', :action => 'logout'} %>

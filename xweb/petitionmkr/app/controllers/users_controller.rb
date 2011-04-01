@@ -14,6 +14,8 @@ class UsersController < ApplicationController
   def index
     username = session[:username]
     @mypetitions = Petition.search(username)
+    portfolio
+    render(portfolio)
   end
 
   # author Tre Jeffries
@@ -80,14 +82,11 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to(users_url,
-          :notice => "User #{@user.username} was successfully created.") }
-        format.xml  { render :xml => @user,
-          :status => :created, :location => @user }
+        format.html { redirect_to(users_url,:notice => "User #{@user.username} was successfully created.") }
+        format.xml  { render :xml => @user, :status => :created, :location => @user }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @user.errors,
-          :status => :unprocessable_entity }
+        format.xml  { render :xml => @user.errors,:status => :unprocessable_entity }
       end
     end
   end
@@ -95,18 +94,14 @@ class UsersController < ApplicationController
   # PUT /users/1
   # PUT /users/1.xml
   def update
-    userid = session[:user_id]
-    @user = User.find(userid)
+    @user = User.find(params[:id])
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to(users_url,
-          :notice => "User #{@user.username} was successfully updated.") }
-        format.xml  { head :ok }
+        format.html {redirect_to(:action => 'portfolio', :id => @user.id)}
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @user.errors,
-          :status => :unprocessable_entity }
+        format.xml  { render :xml => @user.errors,:status => :unprocessable_entity }
       end
     end
   end
