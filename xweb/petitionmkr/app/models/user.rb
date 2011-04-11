@@ -3,18 +3,19 @@ class User < ActiveRecord::Base
 
   attr_accessor :password
   attr_accessor :password_confirmation
+  attr_reader :username
   
   EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
       
   validates :first_name, :presence => true, :length => { :maximum => 25 }
   validates :last_name, :presence => true, :length => { :maximum => 50 }
-  validates :username, :length => { :within => 8..25 }, :uniqueness => true
+  validates :username, :presence => true, :length => { :within => 8..25 }, :uniqueness => true
+  validates :signature, :length => { :within => 8..25 }, :uniqueness => true
   validates :state, :presence => true
   validates :age, :presence => true
   validates :interest, :presence => true
   validates :affiliation, :presence => true
-  validates :email, :presence => true, :length => { :maximum => 100 }, 
-    :format => EMAIL_REGEX, :confirmation => true
+  validates :email, :presence => true, :length => { :maximum => 100 }, :format => EMAIL_REGEX, :confirmation => true
   
   #validate  :password_must_be_present
   validates :password, :confirmation => true

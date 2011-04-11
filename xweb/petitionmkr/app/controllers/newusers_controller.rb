@@ -1,4 +1,6 @@
 class NewusersController < ApplicationController
+   before_filter :set_timezone
+	  
   # GET /newusers
   # GET /newusers.xml
   def index

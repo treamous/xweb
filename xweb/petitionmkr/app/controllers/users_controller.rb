@@ -8,6 +8,7 @@
 #---
 class UsersController < ApplicationController
   before_filter :confirm_logged_in
+  before_filter :set_timezone
   
   # GET /users
   # GET /users.xml

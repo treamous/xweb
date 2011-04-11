@@ -3,15 +3,12 @@ class ApplicationController < ActionController::Base
   layout 'admin'
   
   protect_from_forgery
-  
-  #protected
-  #def authorize
-  #      unless User.find_by_id(session[:user_id])
-  #        redirect_to(:controller => 'admin', :action => 'login') 
-         # flash[:notice] = "Please log in"
-  #      end
-  #end
 
+  def set_timezone
+    # current_user.time_zone #=> 'Mountain Time (US & Canada)'
+    Time.zone = current_user.time_zone || 'Mountain Time (US & Canada)'
+  end
+  
   protected  
   def confirm_logged_in
     unless session[:user_id]

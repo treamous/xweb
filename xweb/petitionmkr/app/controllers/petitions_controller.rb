@@ -1,6 +1,7 @@
 class PetitionsController < ApplicationController
   
   before_filter :confirm_logged_in
+  before_filter :set_timezone
   
   # GET /petitions
   # GET /petitions.xml
