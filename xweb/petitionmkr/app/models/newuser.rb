@@ -8,8 +8,8 @@ class Newuser < ActiveRecord::Base
       
   validates :first_name, :presence => true, :length => { :maximum => 25 }
   validates :last_name, :presence => true, :length => { :maximum => 50 }
-  validates :username, :length => { :within => 8..25 }, :uniqueness => true
-  validates :signature, :length => { :within => 8..25 }, :uniqueness => true
+  validates :username, :presence => true, :length => { :within => 5..25 }, :uniqueness => true
+  validates :signature, :presence => true, :length => { :within => 8..25 }
   validates :state, :presence => true
   validates :age, :presence => true
   validates :interest, :presence => true

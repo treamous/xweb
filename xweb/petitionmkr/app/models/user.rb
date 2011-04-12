@@ -9,8 +9,8 @@ class User < ActiveRecord::Base
       
   validates :first_name, :presence => true, :length => { :maximum => 25 }
   validates :last_name, :presence => true, :length => { :maximum => 50 }
-  validates :username, :presence => true, :length => { :within => 8..25 }, :uniqueness => true
-  validates :signature, :length => { :within => 8..25 }, :uniqueness => true
+  validates :username, :presence => true, :length => { :within => 5..25 }, :uniqueness => true
+  validates :signature, :presence => true, :length => { :within => 8..25 }
   validates :state, :presence => true
   validates :age, :presence => true
   validates :interest, :presence => true
@@ -51,6 +51,11 @@ class User < ActiveRecord::Base
   
   def self.hash_with_salt(password="", salt="")
     Digest::SHA1.hexdigest("Put #{salt} on the #{password}")
+  end
+  
+  # Get default signature value
+  def self.def_sig()
+    "username#{Time.now}"
   end
   
   private

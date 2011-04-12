@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110411072242) do
+ActiveRecord::Schema.define(:version => 20110412062849) do
 
   create_table "petitions", :force => true do |t|
     t.string   "title",       :limit => 100, :null => false
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(:version => 20110411072242) do
     t.string   "username"
     t.string   "first_name",      :limit => 40, :default => ""
     t.string   "last_name",       :limit => 40, :default => ""
-    t.string   "signature",                     :default => "username"
+    t.string   "signature"
   end
 
   add_index "users", ["signature"], :name => "index_users_on_signature"
