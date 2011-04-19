@@ -27,15 +27,16 @@ class NewusersController < ApplicationController
     @newuser.first_name = params[:first_name]
     @newuser.last_name = params[:last_name]
     @newuser.username = params[:username]
+    @newuser.signature = params[:signature]
     @newuser.state = params[:state]
     @newuser.age = params[:age]
     @newuser.interest = params[:interest]
     @newuser.affiliation = params[:affiliation]
     @newuser.email = params[:email]
 
-    saltwrd = Newuser.make_salt(params[:username])
+    saltwrd = User.make_salt(params[:username])
     @newuser.salt = saltwrd
-    @newuser.hashed_password = Newuser.hash_with_salt(params[:password], saltwrd)
+    @newuser.hashed_password = User.hash_with_salt(params[:password], saltwrd)
     @newuser.password = params[:password]
     
     logger.debug("Create THIS user: #{@newuser.username} ")
@@ -44,6 +45,7 @@ class NewusersController < ApplicationController
       if @newuser.save
         session[:user_id] = @newuser.id
         session[:username] = @newuser.username
+        session[:signature] = @newuser.signature
         session[:user] = @newuser
         redirect_to(:controller => 'users', :action => 'portfolio', :notice => '#{@newuser.username} was successfully created.')
         #format.xml  { render :xml => @newuser, :status => :created, :location => @newuser }

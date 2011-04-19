@@ -15,6 +15,7 @@ class AdminController < ApplicationController
     if authorized_user
       session[:user_id] = authorized_user.id
       session[:username] = authorized_user.username
+      session[:signature] = authorized_user.signature
       session[:user] = authorized_user
       flash[:notice] = "You are now logged in."
       redirect_to(:controller => 'users', :action => 'portfolio')

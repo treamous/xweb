@@ -4,9 +4,9 @@ class ApplicationController < ActionController::Base
   
   protect_from_forgery
 
+#set the time zone
   def set_timezone
-    # current_user.time_zone #=> 'Mountain Time (US & Canada)'
-    Time.zone = current_user.time_zone || 'Mountain Time (US & Canada)'
+    Time.zone = 'Mountain Time (US & Canada)'
   end
   
   protected  

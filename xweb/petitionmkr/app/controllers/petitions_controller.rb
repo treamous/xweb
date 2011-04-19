@@ -51,7 +51,8 @@ class PetitionsController < ApplicationController
     @petition.description = params[:description]
     @petition.criteria = params[:criteria]
     @end_date = Time.zone.local(*params[:seldate].sort.map(&:last).map(&:to_i)) 
-    logger.debug("Petition eddate: #{@end_date} ")
+    #@end_date = Time.zone(params[:seldate])
+    logger.debug("Petition endate: #{@end_date} ")
     @petition.closedate = @end_date
     @petition.username = session[:username]
     
