@@ -2,7 +2,7 @@ require 'test_helper'
 
 class NewusersControllerTest < ActionController::TestCase
   setup do
-    @newuser = newusers(:one)
+    @newuser = newusers(:three)
   end
 
   test "should get index" do
@@ -24,26 +24,5 @@ class NewusersControllerTest < ActionController::TestCase
     assert_redirected_to newuser_path(assigns(:newuser))
   end
 
-  test "should show newuser" do
-    get :show, :id => @newuser.to_param
-    assert_response :success
-  end
 
-  test "should get edit" do
-    get :edit, :id => @newuser.to_param
-    assert_response :success
-  end
-
-  test "should update newuser" do
-    put :update, :id => @newuser.to_param, :newuser => @newuser.attributes
-    assert_redirected_to newuser_path(assigns(:newuser))
-  end
-
-  test "should destroy newuser" do
-    assert_difference('Newuser.count', -1) do
-      delete :destroy, :id => @newuser.to_param
-    end
-
-    assert_redirected_to newusers_path
-  end
 end

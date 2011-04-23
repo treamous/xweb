@@ -4,8 +4,39 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-#  column: value
+one:
+  id: 1
+  name: MyString
+  state: MyString
+  age: 1
+  ethnicity: MyString
+  interest: MyString
+  affiliation: MyString
+  hashed_password: <%= User.encrypt_password('secret', SALT) %>
+  salt: <%= SALT %>
+
+two:
+  id: 2
+  name: MyString2
+  state: MyStringaz
+  age: 123
+  ethnicity: MyStringany
+  interest: MyStringclear
+  affiliation: MyString4
+  hashed_password: %= User.encrypt_password('secret', SALT) %>
+  salt: <%= SALT %>
+
+tester123:
+	id: 3
+	username:  "tester123"
+	state:  "FL"
+	age : "98"
+	interest : "None"
+	affiliation : "None"
+	password : "tester123"
+	signature : "tester123"
+	salt : make_salt("tester123")
+	hashed_password : User.hash_with_salt("tester123", User.make_salt("tester123"))
+	email : "tester123@example.com"
+	first_name : "tester123"
+	last_name : "NoName"

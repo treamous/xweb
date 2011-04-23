@@ -3,6 +3,7 @@
 <% SALT = "NaCl" unless defined?(SALT) %>
 
 one:
+  id: 1
   name: MyString
   state: MyString
   age: 1
@@ -13,6 +14,7 @@ one:
   salt: <%= SALT %>
 
 two:
+  id: 2
   name: MyString2
   state: MyStringaz
   age: 123
@@ -21,3 +23,18 @@ two:
   affiliation: MyString4
   hashed_password: %= User.encrypt_password('secret', SALT) %>
   salt: <%= SALT %>
+
+user1234:
+	id: 3
+	username:  "user1234"
+	state:  "FL"
+	age : "98"
+	interest : "None"
+	affiliation : "None"
+	password : "user1234"
+	signature : "user1234"
+	salt : make_salt("user1234")
+	hashed_password : User.hash_with_salt("user1234", User.make_salt("user1234"))
+	email : "user1234@example.com"
+	first_name : "user1234"
+	last_name : "NoName"

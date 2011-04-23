@@ -9,3 +9,10 @@ two:
   title: MyString
   description: MyString
   criteria: MyString
+
+three:
+		title : "Test fixture"
+		description : "any signature required"
+		criteria : "AZ"
+		username : "admin123"
+		closedate : "Sat, 22 Apr 2012 23:45:36 MDT -06:00"

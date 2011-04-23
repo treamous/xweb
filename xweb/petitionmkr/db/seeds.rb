@@ -39,3 +39,21 @@ user.email = "admin123@example.com"
 user.first_name = "admin123"
 user.last_name = "NoName"
 user.save!
+
+pet1 = Petition.new
+pet1.title = "open"
+pet1.description = "any signature required"
+pet1.criteria = "AZ"
+pet1.username = "admin123"
+Time.zone = "Mountain Time (US & Canada)"
+pet1.closedate = Time.zone.now + 20.hours
+pet1.save!
+
+pet2 = Petition.new
+pet2.title = "mjca's petition"
+pet2.description = "all mjca"
+pet2.criteria = "CA"
+pet2.username = "mjca"
+Time.zone = "Mountain Time (US & Canada)"
+pet2.closedate = Time.zone.now + 24.hours
+pet2.save!

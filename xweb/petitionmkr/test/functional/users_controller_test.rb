@@ -2,7 +2,7 @@ require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
   setup do
-    @user = users(:one)
+    @user = users(:user1234)
   end
 
   test "should get index" do
@@ -23,6 +23,19 @@ class UsersControllerTest < ActionController::TestCase
 
     assert_redirected_to user_path(assigns(:user))
   end
+  
+  test "portfolio test" do
+    assert_difference('User.count') do
+      session[:user_id] = @user.id
+      session[:username] = @user.username
+      session[:signature] = @user.signature
+      session[:user] = @user
+      post :portfolio, :user => @user.attributes
+    end
+
+    assert_redirected_to user_path(assigns(:user))
+  end
+
 
   test "should show user" do
     get :show, :id => @user.to_param

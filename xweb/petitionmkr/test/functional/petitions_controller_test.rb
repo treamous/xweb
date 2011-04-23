@@ -2,7 +2,7 @@ require 'test_helper'
 
 class PetitionsControllerTest < ActionController::TestCase
   setup do
-    @petition = petitions(:one)
+    @petition = petitions(:three)
   end
 
   test "should get index" do
