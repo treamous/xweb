@@ -1,4 +1,5 @@
 <%= form_tag(:action => 'create') do %>
+  <%= error_messages_for 'petition' %>
   <div>
       <%= label_tag(:title) %>
       <br/>

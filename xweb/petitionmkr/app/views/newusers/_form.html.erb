@@ -1,8 +1,11 @@
 <div class="petitionnewuser_form">
 	
 <%= form_tag(:action => 'create') do%>
+
+  <%= error_messages_for 'user' %>
+  
   <fieldset>
-  <legend>Enter User Details</legend>
+  <legend>Enter User Account Details</legend>
   
   <div>
     <%= label_tag(:first_name) %><br />
