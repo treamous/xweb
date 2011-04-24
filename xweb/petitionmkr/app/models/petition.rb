@@ -6,6 +6,7 @@ class Petition < ActiveRecord::Base
   validates :title, :presence => true, :length => { :maximum => 25 }
   validates :description, :presence => true, :length => { :maximum => 1000 }
   validates :criteria, :presence => true, :length => { :maximum => 2 }
+  validates :username, :presence => true, :length => { :within => 8..25 }
   validates :closedate, :presence => true
   
   # DB serches for views{i.e portfolio}

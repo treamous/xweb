@@ -23,4 +23,4 @@
   <%= @petition.closedate %>
 </p>
 
-<%= link_to 'Sign this petition!!', {:controller => 'users', :action => 'signthisone', :user => @user, :petition => @petition} %> | link_to 'Back', {:controller => 'users', :action => 'portfolio', :user => @user} %> | <%= link_to 'Logout', {:controller => 'admin', :action => 'logout'} %>
+<%= link_to 'Sign this petition!!', {:controller => 'petitions', :action => 'signthisone', :user => @user, :petid => @pid} %> |  <%=link_to 'Back', {:controller => 'users', :action => 'portfolio', :user => @user} %> | <%= link_to 'Logout', {:controller => 'admin', :action => 'logout'} %>

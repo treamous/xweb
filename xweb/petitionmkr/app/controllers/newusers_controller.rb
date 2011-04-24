@@ -11,12 +11,12 @@ class NewusersController < ApplicationController
   # GET /newusers/new
   # GET /newusers/new.xml
   def new
-    @newuser = User.new
+    #@newuser = User.new
 
-    #respond_to do |format|
-    #  format.html # new.html.erb
+    respond_to do |format|
+      format.html # new.html.erb
     #  format.xml  { render :xml => @newuser }
-    #end
+    end
     #create
   end
 

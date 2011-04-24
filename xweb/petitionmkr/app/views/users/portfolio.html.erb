@@ -94,7 +94,7 @@
 <tr class="<%= cycle('odd', 'even') %>">
 <td>
 <b>
-<%= link_to d.title, {:controller => 'petitions', :action => 'cansign', :user => @user, :id => d.id} %>
+<%= link_to d.title, {:controller => 'petitions', :action => 'cansign', :user => @user, :petid => d.id} %>
 </b>
 </td>
 

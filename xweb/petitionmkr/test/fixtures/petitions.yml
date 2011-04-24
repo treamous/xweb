@@ -4,15 +4,19 @@ one:
   title: MyString
   description: MyString
   criteria: MyString
+  username : "admin123"
+  closedate : "Sat, 23 Apr 2012 23:45:36 MDT -06:00"
 
 two:
-  title: MyString
-  description: MyString
-  criteria: MyString
+  title: MyString2
+  description: MyString2
+  criteria: MyString2
+  username : "admin123"
+  closedate : "Sat, 24 Apr 2012 23:45:36 MDT -06:00"
 
 three:
-		title : "Test fixture"
-		description : "any signature required"
-		criteria : "AZ"
-		username : "admin123"
-		closedate : "Sat, 22 Apr 2012 23:45:36 MDT -06:00"
+  title : "Test fixture"
+  description : "any signature required"
+  criteria : "AZ"
+  username : "admin123"
+  closedate : "Sat, 22 Apr 2012 23:45:36 MDT -06:00"

@@ -114,10 +114,12 @@ class PetitionsController < ApplicationController
   # Render page to commit signature or remove signature
   #
   def unsignthisone
-  	userid = params[:user_id]  	
-  	petid = params[:id]
+  	userid = session[:user_id]
+  	pet =   params[:petition]	
+  	petid = params[:petid]
+  	logger.debug(":petid:  #{petid} ")
   	@user = User.find(userid)
-  	@petition = Petition.find(params[:id])
+  	@petition = Petition.find(petid)
     #@signhere = SpAssociation.spatblbool(userid,petid)
 
     respond_to do |format|
@@ -135,8 +137,7 @@ class PetitionsController < ApplicationController
 					format.xml  { render :xml => @user}
 					format.xml  { render :xml => @petition }
 			end
-	end
-    
+	end    
     
   end
 
@@ -146,10 +147,12 @@ class PetitionsController < ApplicationController
   # Render page to commit signature or remove signature
   #
   def signthisone
-  	userid = params[:user_id]  	
-  	petid = params[:id]
+  	userid = session[:user_id]  	
+  	pet =   params[:petition]	
+  	petid = params[:petid]
+  	logger.debug(":petid:  #{petid} ")
   	@user = User.find(userid)
-  	@petition = Petition.find(params[:id])
+  	@petition = Petition.find(petid)
     #@signhere = SpAssociation.spatblbool(userid,petid)
 
     respond_to do |format|
@@ -181,10 +184,11 @@ class PetitionsController < ApplicationController
   # Render page to commit signature or remove signature
   #
   def cansign
-  	userid = params[:user_id]  	
-  	petid = params[:id]
+  	userid = session[:user_id]  	
+  	petid = params[:petid]
+  	@pid = petid
   	@user = User.find(userid)
-  	@petition = Petition.find(params[:id])
+  	@petition = Petition.find(params[:petid])
     #@signhere = SpAssociation.spatblbool(userid,petid)
 
     respond_to do |format|
@@ -194,12 +198,14 @@ class PetitionsController < ApplicationController
         format.xml  { head :ok }
         format.xml  { render :xml => @user}
         format.xml  { render :xml => @petition }
+        format.xml  { render :xml => @pid }
       else
       	# not already signed -- give option to add
         format.html { render :action => "signable" }
         format.xml  { head :ok }
         format.xml  { render :xml => @user}
         format.xml  { render :xml => @petition }
+        format.xml  { render :xml => @pid }
       end
     end
   end
