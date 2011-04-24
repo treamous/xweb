@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110413082421) do
+ActiveRecord::Schema.define(:version => 20110423222549) do
 
   create_table "petitions", :force => true do |t|
     t.string   "title",       :limit => 100, :null => false
@@ -41,5 +41,13 @@ ActiveRecord::Schema.define(:version => 20110413082421) do
   end
 
   add_index "users", ["username"], :name => "index_users_on_username"
+
+  create_table "users_petitions", :id => false, :force => true do |t|
+    t.integer "user_id"
+    t.integer "petition_id"
+  end
+
+  add_index "users_petitions", ["petition_id", "user_id"], :name => "index_users_petitions_on_petition_id_and_user_id"
+  add_index "users_petitions", ["user_id"], :name => "index_users_petitions_on_user_id"
 
 end

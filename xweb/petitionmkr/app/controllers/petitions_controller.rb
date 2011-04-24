@@ -140,8 +140,38 @@ class PetitionsController < ApplicationController
     
   end
 
+  # signthisone /petitions/signthisone
+  # signthisone /petitions/signthisone.xml
+  #
+  # Render page to commit signature or remove signature
+  #
+  def signthisone
+  	userid = params[:user_id]  	
+  	petid = params[:id]
+  	@user = User.find(userid)
+  	@petition = Petition.find(params[:id])
+    #@signhere = SpAssociation.spatblbool(userid,petid)
 
-signthisone
+    respond_to do |format|
+			if SpAssociation.spatblbool(userid,petid)
+				if SpAssociation.spatbladd(userid,petid)
+					# already signed -- remove then give option to sign
+					format.html { render :action => "signalready" }
+					format.xml  { head :ok }
+					format.xml  { render :xml => @user}
+					format.xml  { render :xml => @petition }
+				end
+			else
+					format.html { render :action => "signable" }
+					format.xml  { head :ok }
+					format.xml  { render :xml => @user}
+					format.xml  { render :xml => @petition }
+			end
+	end
+    
+    
+  end
+
 
 
 
