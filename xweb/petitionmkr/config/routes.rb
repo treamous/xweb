@@ -1,4 +1,5 @@
 Petitionmkr::Application.routes.draw do
+
   #resources :newusers
 
   #resources :petitions

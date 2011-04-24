@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+<h2>
+<b>Petition Info</b>
+</h2>
+
+<p>
+  <b>Title:</b>
+  <%= @petition.title %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @petition.description %>
+</p>
+
+<p>
+  <b>Criteria:</b>
+  <%= @petition.criteria %>
+</p>
+
+<p>
+  <b>Closure Date:</b>
+  <%= @petition.closedate %>
+</p>
+
+<%= link_to 'Sign this petition!!', {:controller => 'users', :action => 'signthisone', :user => @user, :petition => @petition} %> | link_to 'Back', {:controller => 'users', :action => 'portfolio', :user => @user} %> | <%= link_to 'Logout', {:controller => 'admin', :action => 'logout'} %>

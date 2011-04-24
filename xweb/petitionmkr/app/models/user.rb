@@ -1,12 +1,15 @@
 require 'digest/sha1'
 class User < ActiveRecord::Base
 
+  has_and_belongs_to_many :petitions
+  
   attr_accessor :password
   attr_accessor :password_confirmation
   #attr_reader :username
   
   EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
-      
+  
+  #validations galore...    
   validates :first_name, :presence => true, :length => { :maximum => 25 }
   validates :last_name, :presence => true, :length => { :maximum => 50 }
   validates :username, :presence => true, :length => { :within => 8..25 }, :uniqueness => true
@@ -30,6 +33,7 @@ class User < ActiveRecord::Base
   
   attr_protected :hashed_password, :salt
   
+  # Verify user...
   def self.authenticate(username="", password="")
     user = User.find_by_username(username)
     if user && user.password_match?(password)
@@ -45,10 +49,12 @@ class User < ActiveRecord::Base
     hashed_password == User.hash_with_salt(password, salt)
   end
   
+  # Make a salt string for the DB
   def self.make_salt(username="")
     Digest::SHA1.hexdigest("Use #{username} with #{Time.now} to make salt")
   end
   
+  # Use a salt to create a hashed password
   def self.hash_with_salt(password="", salt="")
     Digest::SHA1.hexdigest("Put #{salt} on the #{password}")
   end
@@ -60,6 +66,7 @@ class User < ActiveRecord::Base
   
   private
   
+  # ...
   def create_hashed_password
     # Whenever :password has a value hashing is needed
     unless password.blank?
@@ -69,6 +76,7 @@ class User < ActiveRecord::Base
     end
   end
 
+  # ...
   def clear_password
     # for security and b/c hashing is not needed
     self.password = nil

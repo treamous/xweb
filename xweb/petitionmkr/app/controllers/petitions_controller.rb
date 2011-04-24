@@ -25,6 +25,29 @@ class PetitionsController < ApplicationController
     end
   end
 
+  # signable /petitions/signable
+  # signable /petitions/signable.xml
+  def signable
+    @petition = Petition.find(params[:id])
+
+    respond_to do |format|
+      format.html # signable.html.erb
+      format.xml  { render :xml => @petition }
+    end
+  end
+
+
+  # signalready /petitions/signable
+  # signalready /petitions/signable.xml
+  def signalready
+    @petition = Petition.find(params[:id])
+
+    respond_to do |format|
+      format.html # signalready.html.erb
+      format.xml  { render :xml => @petition }
+    end
+  end
+  
   # GET /petitions/new
   # GET /petitions/new.xml
   def new
@@ -83,6 +106,78 @@ class PetitionsController < ApplicationController
       end
     end
   end
+
+
+  # unsignthisone /petitions/unsignthisone
+  # unsignthisone /petitions/unsignthisone.xml
+  #
+  # Render page to commit signature or remove signature
+  #
+  def unsignthisone
+  	userid = params[:user_id]  	
+  	petid = params[:id]
+  	@user = User.find(userid)
+  	@petition = Petition.find(params[:id])
+    #@signhere = SpAssociation.spatblbool(userid,petid)
+
+    respond_to do |format|
+			if SpAssociation.spatblbool(userid,petid)
+				if SpAssociation.spatblrmv(userid,petid)
+					# already signed -- remove then give option to sign
+					format.html { render :action => "signable" }
+					format.xml  { head :ok }
+					format.xml  { render :xml => @user}
+					format.xml  { render :xml => @petition }
+				end
+			else
+					format.html { render :action => "signalready" }
+					format.xml  { head :ok }
+					format.xml  { render :xml => @user}
+					format.xml  { render :xml => @petition }
+			end
+	end
+    
+    
+  end
+
+
+signthisone
+
+
+
+  # cansign /petitions/cansign
+  # cansign /petitions/cansign.xml
+  #
+  # Render page to commit signature or remove signature
+  #
+  def cansign
+  	userid = params[:user_id]  	
+  	petid = params[:id]
+  	@user = User.find(userid)
+  	@petition = Petition.find(params[:id])
+    #@signhere = SpAssociation.spatblbool(userid,petid)
+
+    respond_to do |format|
+      if SpAssociation.spatblbool(userid,petid)
+      	# already signed -- give option to remove
+        format.html { render :action => "signalready" }
+        format.xml  { head :ok }
+        format.xml  { render :xml => @user}
+        format.xml  { render :xml => @petition }
+      else
+      	# not already signed -- give option to add
+        format.html { render :action => "signable" }
+        format.xml  { head :ok }
+        format.xml  { render :xml => @user}
+        format.xml  { render :xml => @petition }
+      end
+    end
+  end
+
+
+
+
+
 
   # DELETE /petitions/1
   # DELETE /petitions/1.xml
