@@ -11,5 +11,5 @@ class Petition < ActiveRecord::Base
   
   # DB serches for views{i.e portfolio}
   scope :search, lambda {|query| where(["username LIKE ?", "%#{query}%"])}
-  scope :searchsignup, lambda {|query| where(["username NOT LIKE ? AND (closedate > datetime('now'))", "%#{query}%"])}
+  scope :searchsignup, lambda {|query| where(["username NOT LIKE ? AND (closedate > CURRENT_TIMESTAMP)", "%#{query}%"])}
 end
