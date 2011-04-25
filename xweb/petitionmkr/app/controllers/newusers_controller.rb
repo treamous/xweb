@@ -11,11 +11,11 @@ class NewusersController < ApplicationController
   # GET /newusers/new
   # GET /newusers/new.xml
   def new
-    #@newuser = User.new
+    @newuser = User.new
 
     respond_to do |format|
       format.html # new.html.erb
-    #  format.xml  { render :xml => @newuser }
+     format.xml  { render :xml => @newuser }
     end
     #create
   end
@@ -47,6 +47,7 @@ class NewusersController < ApplicationController
         session[:username] = @newuser.username
         session[:signature] = @newuser.signature
         session[:user] = @newuser
+		flash[:notice] = "User is successfully created"
         redirect_to(:controller => 'users', :action => 'portfolio', :notice => '#{@newuser.username} was successfully created.')
         #format.xml  { render :xml => @newuser, :status => :created, :location => @newuser }
       else

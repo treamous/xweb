@@ -82,11 +82,13 @@ class PetitionsController < ApplicationController
     respond_to do |format|
       if @petition.save
         logger.debug("Petition info has been saved in create: #{@petition.title} ")
+		flash[:notice] = "Petition is successfully created"
         format.html { redirect_to(:controller => 'users', :action => 'portfolio', :notice => 'Petition was successfully created.') }
         #format.xml  { render :xml => @petition, :status => :created, :location => @petition }
       else
+	 # respond_to do |format|
         format.html { render :action => "new", :notice => 'Petition was not created. Try again.' }
-        #format.xml  { render :xml => @petition.errors, :status => :unprocessable_entity }
+        format.xml  { render :xml => @petition.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -163,6 +165,7 @@ class PetitionsController < ApplicationController
 					format.xml  { head :ok }
 					format.xml  { render :xml => @user}
 					format.xml  { render :xml => @petition }
+					
 				end
 			else
 					format.html { render :action => "signable" }
