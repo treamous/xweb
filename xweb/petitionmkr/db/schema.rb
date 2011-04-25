@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(:version => 20110423222549) do
   add_index "petitions", ["username"], :name => "index_petitions_on_username"
 
   create_table "users", :force => true do |t|
+    t.string   "name",            :limit => 50
     t.string   "state",           :limit => 2
     t.integer  "age",             :limit => 3
     t.text     "interest"
@@ -40,6 +41,7 @@ ActiveRecord::Schema.define(:version => 20110423222549) do
     t.string   "signature"
   end
 
+  add_index "users", ["name"], :name => "index_users_on_name"
   add_index "users", ["username"], :name => "index_users_on_username"
 
   create_table "users_petitions", :id => false, :force => true do |t|

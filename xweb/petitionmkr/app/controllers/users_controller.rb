@@ -83,6 +83,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+	  flash[:notice] = "user is successfully created"
         format.html { redirect_to(users_url,:notice => "User #{@user.username} was successfully created.") }
         format.xml  { render :xml => @user, :status => :created, :location => @user }
       else
@@ -99,6 +100,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
+	  flash[:notice] = "user is successfully updated"
         format.html {redirect_to(:action => 'portfolio', :id => @user.id)}
       else
         format.html { render :action => "edit" }
