@@ -161,7 +161,7 @@ class PetitionsController < ApplicationController
 			if SpAssociation.spatblbool(userid,petid)
 				if SpAssociation.spatbladd(userid,petid)
 					# already signed -- remove then give option to sign
-					flash[:notice] = "Petition is successfully signed123"
+					flash[:notice] = "Petition is successfully signed"
         format.html { redirect_to(:controller => 'users', :action => 'portfolio', :notice => '') }
 				end
 			else

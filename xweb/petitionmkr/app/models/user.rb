@@ -8,16 +8,18 @@ class User < ActiveRecord::Base
   #attr_reader :username
   
   EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
+  NAME_REGEX = /^[a-zA-Z]+$/
   
   #validations galore...    
-  validates :first_name, :presence => true, :length => { :maximum => 25 }
-  validates :last_name, :presence => true, :length => { :maximum => 50 }
+  validates :first_name, :presence => true, :length => { :maximum => 25 }, :format => {:with => NAME_REGEX, :message => ' should have alphabets only.'}
+  validates :last_name, :presence => true, :length => { :maximum => 50 }, :format => {:with => NAME_REGEX, :message => ' should have alphabets only.'}
   validates :username, :presence => true, :length => { :within => 8..25 }, :uniqueness => true
   validates :signature, :presence => true, :length => { :within => 8..25 }
-  validates :state, :presence => true
+  validates :state, :presence => true , :format => {:with => NAME_REGEX, :message => ' should have alphabets only.'}
   validates :age, :presence => true
-  validates :interest, :presence => true
-  validates :affiliation, :presence => true
+  validates_numericality_of :age, :integer_only => true, :within => 0..100
+  validates :interest, :presence => true , :format => {:with => NAME_REGEX, :message => ' should have alphabets only.'}
+  validates :affiliation, :presence => true, :format => {:with => NAME_REGEX, :message => ' should have alphabets only.'}
   validates :email, :presence => true, :length => { :maximum => 100 }, :format => EMAIL_REGEX, :confirmation => true
   
   #validate  :password_must_be_present
@@ -28,6 +30,7 @@ class User < ActiveRecord::Base
 
   before_save :create_hashed_password
   after_save :clear_password
+  
 
   scope :named, lambda {|first,last| where(:first_name => first, :last_name => last)}
   

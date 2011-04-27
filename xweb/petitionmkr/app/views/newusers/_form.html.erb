@@ -26,11 +26,11 @@
     <%= text_field_tag(:last_name)%>
   </div>
     <div>
-    <%= label_tag(:user_name) %><br />
+    <%= label_tag(:user_name) %> (minimum 8 characters)<br />
     <%= text_field_tag(:username) %>
   </div>
      <div>
-    <%= label_tag(:signature) %><br />
+    <%= label_tag(:signature) %> (minimum 8 characters)<br />
     <%= text_field_tag(:signature) %>
   </div>
       <div>
@@ -54,7 +54,7 @@
     <%= text_field_tag(:affiliation) %>
   </div>
   <div>
-    <%= label_tag(:password)%><br />
+    <%= label_tag(:password)%> (minimum 8 characters)<br />
     <%= password_field_tag(:password)%>
   </div>
   <div>
