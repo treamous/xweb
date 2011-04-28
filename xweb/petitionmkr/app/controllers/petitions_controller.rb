@@ -124,20 +124,30 @@ class PetitionsController < ApplicationController
   	@petition = Petition.find(petid)
     #@signhere = SpAssociation.spatblbool(userid,petid)
 
+    @spa = SpAssociation.new
+	@spa = SpAssociation.where("user_id = ? AND petition_id = ?", userid, petid)
+	#sid = spa.attributes['id'] 
+	logger.debug(":spa:  #{@spa} ")
+	#@spa.delete_all
     respond_to do |format|
-			if SpAssociation.spatblbool(userid,petid)
-				if SpAssociation.spatblrmv(userid,petid)
+		   if @spa.delete_all
 					# already signed -- remove then give option to sign
-					format.html { render :action => "signable" }
-					format.xml  { head :ok }
-					format.xml  { render :xml => @user}
-					format.xml  { render :xml => @petition }
-				end
+					#flash[:notice] = "Petition is successfully unsigned"
+					#format.html { render :action => "signable" }
+					#format.xml  { head :ok }
+					#format.xml  { render :xml => @user}
+					#format.xml  { render :xml => @petition }
+					#format.xml  { render :xml => :notice }
+		    # ugly but ok for this redirect...
+					flash[:notice] = "Petition is successfully unsigned"
+                    format.html { redirect_to(:controller => 'users', :action => 'portfolio', :notice => '') }
 			else
-					format.html { render :action => "signalready" }
-					format.xml  { head :ok }
-					format.xml  { render :xml => @user}
-					format.xml  { render :xml => @petition }
+			#		format.html { render :action => "signalready" }
+			#		format.xml  { head :ok }
+			#		format.xml  { render :xml => @user}
+			#		format.xml  { render :xml => @petition }
+					flash[:notice] = "Petition is unsuccessfully unsigned"
+                    format.html { redirect_to(:controller => 'users', :action => 'portfolio', :notice => '') }
 			end
 	end    
     
@@ -157,16 +167,21 @@ class PetitionsController < ApplicationController
   	@petition = Petition.find(petid)
     #@signhere = SpAssociation.spatblbool(userid,petid)
 
+  	spa = SpAssociation.new
+  	spa.user_id = userid
+  	spa.petition_id = petid
+  	#if spa.save!
+
     respond_to do |format|
-			if SpAssociation.spatblbool(userid,petid)
-				if SpAssociation.spatbladd(userid,petid)
+			if SpAssociation.searchSPA(userid,petid)
+				if spa.save
 					# already signed -- remove then give option to sign
 					flash[:notice] = "Petition is successfully signed"
-        format.html { redirect_to(:controller => 'users', :action => 'portfolio', :notice => '') }
+                    format.html { redirect_to(:controller => 'users', :action => 'portfolio', :notice => '') }
+				else
+			        flash[:notice] = "Petition is unsuccessfully signed"
+					format.html { redirect_to(:controller => 'users', :action => 'portfolio', :notice => '') }
 				end
-			else
-			flash[:notice] = "Petition is successfully signed"
-					 format.html { redirect_to(:controller => 'users', :action => 'portfolio', :notice => '') }
 			end
 	end
     
