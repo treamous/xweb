@@ -16,9 +16,10 @@ class User < ActiveRecord::Base
   validates :last_name, :presence => true, :length => { :maximum => 50 }, :format => {:with => NAME_REGEX, :message => ' should have alphabets only.'}
   validates :username, :presence => true, :length => { :within => 8..25 }, :uniqueness => true
   validates :signature, :presence => true, :length => { :within => 8..25 }
-  validates :state, :presence => true , :length => { :maximum => 2 }, :format => {:with => NAME_REGEX, :message => ' should have alphabets only.'}
+  validates :state, :presence => true , :length => { :maximum => 2 }, :format => {:with => NAME_REGEX, :message => ' should have alphabets aonly.'}
   validates :age, :presence => true
   validates_numericality_of :age, :integer_only => true, :within => 0..100
+  validates :age, :numericality => {:greater_than_or_equal_to => 99}, :length => { :maximum => 2 }
   validates :interest, :presence => true , :format => {:with => NAME_REGEX, :message => ' should have alphabets only.'}
   validates :affiliation, :presence => true, :format => {:with => NAME_REGEX, :message => ' should have alphabets only.'}
   validates :email, :presence => true, :length => { :maximum => 100 }, :format => EMAIL_REGEX, :confirmation => true
