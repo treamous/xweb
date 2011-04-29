@@ -19,7 +19,8 @@ class User < ActiveRecord::Base
   validates :state, :presence => true , :length => { :maximum => 2 }, :format => {:with => NAME_REGEX, :message => ' should have alphabets aonly.'}
   validates :age, :presence => true
   validates_numericality_of :age, :integer_only => true, :within => 0..100
-  validates :age, :numericality => {:greater_than_or_equal_to => 99}, :length => { :maximum => 2 }
+  validates :age, :numericality => {:greater_than_or_equal_to => 0}
+  validates :age, :numericality => { :less_than_or_equal_to => 100 }
   validates :interest, :presence => true , :format => {:with => NAME_REGEX, :message => ' should have alphabets only.'}
   validates :affiliation, :presence => true, :format => {:with => NAME_REGEX, :message => ' should have alphabets only.'}
   validates :email, :presence => true, :length => { :maximum => 100 }, :format => EMAIL_REGEX, :confirmation => true
